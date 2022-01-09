@@ -6,10 +6,17 @@ function getMessageById(messageId) {
     return messageList.find(message => message.id === messageId);
 }
 
-function getMessageByUserId(userId, lastReadIndex) {
+function getMessageByUserIdAndLastReadIndex(userId, lastReadIndex) {
     return messageList
         .filter(message => message.userId === userId)
         .filter(message => message.id > lastReadIndex)
+}
+
+function getMessageByUserIdAndTimestamp(userId, startIndex, endIndex) {
+    return messageList
+        .filter(message => message.userId === userId)
+        .filter(message => message.timestamp > startIndex)
+        .filter(message => message.timestamp < endIndex);
 }
 
 function deleteMessageById(messageId) {
@@ -26,7 +33,8 @@ function saveMessage(message) {
 
     const messageWithId = {
         ...message,
-        id: messageIdCounter
+        id: messageIdCounter,
+        timestamp: Date.now()
     }
     messageIdCounter++;
     messageList.push(messageWithId);
@@ -37,6 +45,7 @@ function saveMessage(message) {
 module.exports = {
     saveMessage,
     getMessageById,
-    getMessageByUserId,
-    deleteMessageById,
+    getMessageByUserIdAndLastReadIndex,
+    getMessageByUserIdAndTimestamp,
+    deleteMessageById
 }

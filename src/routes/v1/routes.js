@@ -87,13 +87,24 @@ function validateGetMessage(req, res, next) {
     const user = userRepo.getUser(res.locals.qUserId);
     if (user) {
         res.locals.user = user;
-        next();
     } else {
         return res.status(404).send({ error: 'user not found'})
     }
+
+    if (res.locals.qStartIndex && !res.locals.qEndIndex) {
+        return res.status(400).send({ error: 'endIndex must be provided'})
+    }
+    if (res.locals.qEndIndex && !res.locals.qStartIndex) {
+        return res.status(400).send({ error: 'startIndex must be provided'})
+    }
+    next();
 }
 
 function updateUserLastReadIndex(req, res, next) {
+    if (res.locals.qStartIndex || res.locals.qEndIndex) {
+        return next();
+    }
+
     const ids = res.locals.dbResult
     .filter( e => e)  //remove null
     .filter( e => e !== NaN)  //remove NaN
@@ -165,12 +176,18 @@ function storeMessage(req, res, next) {
 }
 
 function retrieveMessage(req, res, next) {
+    let dbResult;
 
-    //in the real world this could be an asynch (db) call
-    const dbResult = messageRepo.getMessageByUserId(res.locals.qUserId, res.locals.user.lastReadIndex);
-    //handle potential errors
+    if (res.locals.qStartIndex || res.locals.qEndIndex) {
+        //in the real world this could be an asynch (db) call
+        dbResult = messageRepo.getMessageByUserIdAndTimestamp(res.locals.qUserId, res.locals.qStartIndex, res.locals.qEndIndex);
+        //handle potential errors
+    } else {
+        dbResult = messageRepo.getMessageByUserIdAndLastReadIndex(res.locals.qUserId, res.locals.user.lastReadIndex);
+    }
     res.locals.dbResult = dbResult;
     next();
+
 }
 
 function sendPostResponse(req, res, next) {

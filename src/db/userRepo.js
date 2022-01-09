@@ -7,7 +7,10 @@ function updateUserLastReadIndex(userId, lastReadIndex) {
     const updatedUserList = userList
         .map(user => {
             if (user.id === userId) {
-                return {...user, lastReadIndex: lastReadIndex};
+                return {
+                    ...user, 
+                    lastReadIndex: lastReadIndex
+                };
             }
             return user;
         });
