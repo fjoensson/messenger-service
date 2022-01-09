@@ -1,0 +1,23 @@
+{
+  "name": "messenger-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "test": "echo \"Error: no test specified yet\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fjoensson/messenger-service.git"
+  },
+  "author": "Fredrik Jonsson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fjoensson/messenger-service/issues"
+  },
+  "homepage": "https://github.com/fjoensson/messenger-service#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
