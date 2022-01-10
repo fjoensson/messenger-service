@@ -19,6 +19,7 @@ available recipientId =[111,222,333]
 
 GET:
 userId query parameter mandatory, use same as recipientId
+startIndex/endIndex is epoch
 
 # Assumptions
 * A recipient must be registred before you can send a message
