@@ -14,6 +14,8 @@ npm start
 # Test
 curl commands available in /curl.txt
 
+basic results logged to console
+
 POST:
 available recipientId =[111,222,333]
 
