@@ -8,7 +8,7 @@ function updateUserLastReadIndex(userId, lastReadIndex) {
         .map(user => {
             if (user.id === userId) {
                 return {
-                    ...user, 
+                    ...user,
                     lastReadIndex: lastReadIndex
                 };
             }
@@ -20,9 +20,9 @@ function updateUserLastReadIndex(userId, lastReadIndex) {
 
 //mock
 let userList = [
-    { id:111, lastReadIndex: 0 },
-    { id:222, lastReadIndex: 0 },
-    { id:333, lastReadIndex: 0 }
+    { id: 111, lastReadIndex: 0 },
+    { id: 222, lastReadIndex: 0 },
+    { id: 333, lastReadIndex: 0 }
 ];
 
 module.exports = {

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const messenger = require('../../middleware/v1/messenger'); 
+const messenger = require('../../middleware/v1/messenger');
 
 router.get('/', function (req, res, next) {
     res.send('This is the messenger-service!')

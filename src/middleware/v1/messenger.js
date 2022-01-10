@@ -1,8 +1,8 @@
 const userRepo = require('../../db/userRepo');
-const messageRepo = require('../../db/messageRepo'); 
+const messageRepo = require('../../db/messageRepo');
 
 function initMessage(req, res, next) {
-    
+
     res.locals = {
         messageId: parseInt(req.params.messageId),
         messageIds: req.body.messageIds,
@@ -10,7 +10,7 @@ function initMessage(req, res, next) {
             messageText: req.body.messageText,
             recipientId: parseInt(req.body.recipientId),
         },
-        query:{
+        query: {
             userId: parseInt(req.query.userId),
             startIndex: req.query.startIndex,
             endIndex: req.query.endIndex,
@@ -26,7 +26,7 @@ function validateMessage(req, res, next) {
     // example of static validation 
     // use api-validator and check. e.g type, length, format, escaping 
     if (res.locals.message.messageText.length > 144) {
-        return res.status(400).send({ error: 'messageText longer than 144 char'})
+        return res.status(400).send({ error: 'messageText longer than 144 char' })
     }
 
     // example of dymanic validation
@@ -36,7 +36,7 @@ function validateMessage(req, res, next) {
         res.locals.user = user;
         next();
     } else {
-        return res.status(404).send({ error: 'recipientId not found'})
+        return res.status(404).send({ error: 'recipientId not found' })
     }
 }
 
@@ -63,21 +63,21 @@ function validateGetMessage(req, res, next) {
     //TODO api-validator
 
     if (!res.locals.query.userId) {
-        return res.status(400).send({ error: 'userId must be provided'})
+        return res.status(400).send({ error: 'userId must be provided' })
     }
 
     const user = userRepo.getUser(res.locals.query.userId);
     if (user) {
         res.locals.user = user;
     } else {
-        return res.status(404).send({ error: 'user not found'})
+        return res.status(404).send({ error: 'user not found' })
     }
 
     if (res.locals.query.startIndex && !res.locals.query.endIndex) {
-        return res.status(400).send({ error: 'endIndex must be provided'})
+        return res.status(400).send({ error: 'endIndex must be provided' })
     }
     if (res.locals.query.endIndex && !res.locals.query.startIndex) {
-        return res.status(400).send({ error: 'startIndex must be provided'})
+        return res.status(400).send({ error: 'startIndex must be provided' })
     }
     next();
 }
@@ -102,10 +102,10 @@ function updateUserLastReadIndex(req, res, next) {
     }
 
     const ids = res.locals.dbResult
-        .filter( e => e)  //remove null
-        .filter( e => e !== NaN)  //remove NaN
-        .map( e => e.id )
-    
+        .filter(e => e)  //remove null
+        .filter(e => e !== NaN)  //remove NaN
+        .map(e => e.id)
+
     if (ids.length > 0) {
         const lastReadIndex = Math.max(...ids);
         userRepo.updateUserLastReadIndex(res.locals.query.userId, lastReadIndex)
@@ -115,8 +115,8 @@ function updateUserLastReadIndex(req, res, next) {
 
 function sendGetResponse(req, res, next) {
     const getMessageIds = res.locals.dbResult
-        .filter( e => e)  //remove null
-        .map( e => e.id );
+        .filter(e => e)  //remove null
+        .map(e => e.id);
 
     console.log('Get messages #', getMessageIds);
     res.status(200).send(res.locals.dbResult);
@@ -132,8 +132,8 @@ function deleteMessage(req, res, next) {
         res.locals.dbResult = dbResult;
         next();
     } else {
-        return res.status(404).send({ error: 'message not found'})
-    } 
+        return res.status(404).send({ error: 'message not found' })
+    }
 }
 
 function sendDeleteResponse(req, res, next) {
@@ -150,7 +150,7 @@ function deleteMultiMessage(req, res, next) {
     ids.forEach(id => {
         const dbResult = messageRepo.deleteMessageById(id)
         dbResultList.push(dbResult)
-    }); 
+    });
     //handle potential errors
 
     //TODO improve handling of partial failures
@@ -158,14 +158,14 @@ function deleteMultiMessage(req, res, next) {
         res.locals.dbResult = dbResultList;
         next();
     } else {
-        return res.status(404).send({ error: 'message not found'})
-    } 
+        return res.status(404).send({ error: 'message not found' })
+    }
 }
 
 function sendDeleteMultiMessageResponse(req, res, next) {
     const deleteMessageIds = res.locals.dbResult
-        .filter( e => e)  //remove null
-        .map( e => e.id );
+        .filter(e => e)  //remove null
+        .map(e => e.id);
 
     console.log('Deleted messages #', deleteMessageIds);
     res.status(200).send(res.locals.dbResult);
