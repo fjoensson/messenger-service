@@ -5,7 +5,7 @@ Install nodejs Gallium (16 LTS)
 
 Install npm
 
-git clone github.com/fjoensson/messenger-service/
+git clone git@github.com:fjoensson/messenger-service.git
 
 npm install
 
