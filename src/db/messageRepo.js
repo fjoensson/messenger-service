@@ -1,7 +1,6 @@
 let messageIdCounter = 1;
 let messageList = []; //mock store/db
 
-
 function getMessageById(messageId) {
     return messageList.find(message => message.id === messageId);
 }
@@ -15,8 +14,8 @@ function getMessageByUserIdAndLastReadIndex(userId, lastReadIndex) {
 function getMessageByUserIdAndTimestamp(userId, startIndex, endIndex) {
     return messageList
         .filter(message => message.userId === userId)
-        .filter(message => message.timestamp > startIndex)
-        .filter(message => message.timestamp < endIndex);
+        .filter(message => message.timestamp >= startIndex)
+        .filter(message => message.timestamp <= endIndex);
 }
 
 function deleteMessageById(messageId) {
@@ -30,7 +29,6 @@ function deleteMessageById(messageId) {
 }
 
 function saveMessage(message) {
-
     const messageWithId = {
         ...message,
         id: messageIdCounter,
@@ -40,7 +38,6 @@ function saveMessage(message) {
     messageList.push(messageWithId);
     return messageWithId;
 }
-
 
 module.exports = {
     saveMessage,
