@@ -27,17 +27,17 @@ npm start
 * static validation [x] - example
 * dynamic validation [x] - example
 * unit test [ ]
-* api test [ ]
+* api test [ ] - manual
 * authentication [ ]
 * authorization/acl [ ]
 * trim strings [ ]
 * security [ ]
-* logging [ ]
+* logging [ ] - discuss winston
 * monitoring [ ]
-* configuration [ ]
+* configuration [ ] - discuss config
 * simplify/refactor [x]
 * performance [ ]
 * redundancy [ ]
-* formatting [ ]
-* lint checks [ ]
+* formatting [x]
+* lint checks [x]
 * migration [ ]
