@@ -17,7 +17,8 @@ npm start
 
 # Comments
 * Messages may be stored under the user instead of by themselves. Volumes?
-* I try to use immutables were possible...
+* I try to use immutables were possible. I like helper libraries but skipped them now.
+* The implementation of the mock store/db is not production quality...
 
 # TODO
 * api versioning [x] 
