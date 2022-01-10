@@ -30,6 +30,7 @@ startIndex/endIndex is epoch
 # Comments
 * Messages may be stored under the user instead of by themselves. Volumes?
 * The implementation of the mock store/db is not production quality...
+* This was pretty fun
 
 # TODO
 * functinal complete [x]
