@@ -11,6 +11,9 @@ npm install
 
 npm start
 
+# Test
+
+
 # Assumptions
 * A recipient must be registred before you can send a message
 * The client is interested in messages for a single user - not all messages

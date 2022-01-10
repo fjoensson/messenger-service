@@ -1,0 +1,26 @@
+curl --location --request POST 'localhost:8088/api/v1/messages' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "messageText": "thisIsMyInputText",
+    "recipientId": "111"
+}'
+
+---------------------------
+
+curl --location --request DELETE 'localhost:8088/api/v1/messages/2'
+
+---------------------------
+
+curl --location --request DELETE 'localhost:8088/api/v1/messages' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "messageIds": [4,1]
+}'
+
+---------------------------
+
+curl --location --request GET 'localhost:8088/api/v1/messages?userId=111'
+
+---------------------------
+
+curl --location --request GET 'localhost:8088/api/v1/messages?userId=111&startIndex=0&endIndex=1700000000000'
