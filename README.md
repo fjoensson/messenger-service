@@ -12,7 +12,13 @@ npm install
 npm start
 
 # Test
+curl commands available in /curl.txt
 
+POST:
+available recipientId =[111,222,333]
+
+GET:
+userId query parameter mandatory, use same as recipientId
 
 # Assumptions
 * A recipient must be registred before you can send a message
