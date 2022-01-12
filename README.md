@@ -30,9 +30,7 @@ startIndex/endIndex is epoch
 * Fetch "according to start and stop index" - unclear if this is related to id:s or not, but since it is mentioned in relation to timestamp I assume it start/end timestamp. 
 
 # Comments
-* Messages may be stored under the user instead of by themselves. Volumes?
-* The implementation of the mock store/db is not production quality...
-* This was pretty fun
+* Messages may be partitioned by user instead of by themselves. Volumes?
 
 # TODO
 * functinal complete [x]
